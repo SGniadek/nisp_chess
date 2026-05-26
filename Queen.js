@@ -1,12 +1,33 @@
-// Klasa reprezentująca królową
-class Queen {
-    constructor() {
+class Queen
+{
+    constructor()
+    {
         this.type = "QUEEN";
     }
 
-    validateMove(move) {
+    validateMove(move)
+    {
+        let legalMove = false;
         
-        // dokoncz implementacje
-        return false;
+        let diffX = Math.abs(move.destinationX - move.sourceX);
+        let diffY = Math.abs(move.destinationY - move.sourceY);
+
+        if (move.sourceX === move.destinationX && move.sourceY !== move.destinationY)
+        {
+            legalMove = true;
+        }
+
+        if (move.sourceY === move.destinationY && move.sourceX !== move.destinationX)
+        {
+            legalMove = true;
+        }
+
+        if (diffX === diffY && diffX !== 0)
+        {
+            legalMove = true;
+        }
+
+        if (legalMove) return true;
+        else return false;
     }
 }
