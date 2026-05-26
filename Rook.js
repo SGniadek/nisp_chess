@@ -5,19 +5,21 @@ class Rook {
     }
 
     validateMove(move) {
-        const { startX, startY, endX, endY } = move;
+        
+        let legalMove = false;
 
-        // 1. Sprawdzenie, czy figura faktycznie się poruszyła
-        if (startX === endX && startY === endY) {
-            return false;
+        // 1. Warunek ruchu w pionie (stałe X, zmienia się Y)
+        if (move.sourceX === move.destinationX && move.sourceY !== move.destinationY) {
+            legalMove = true;
         }
 
-        // 2. Ruch jest prawidłowy, jeśli zmienia się TYLKO X (ruch poziomy) 
-        //    LUB zmienia się TYLKO Y (ruch pionowy)
-        const isHorizontalMove = startY === endY && startX !== endX;
-        const isVerticalMove = startX === endX && startY !== endY;
+        // 2. Warunek ruchu w poziomie (stałe Y, zmienia się X)
+        if (move.sourceY === move.destinationY && move.sourceX !== move.destinationX) {
+            legalMove = true;
+        }
 
-        // Jeśli jeden z tych warunków jest prawdziwy, ruch jest geometrycznie poprawny
-        return isHorizontalMove || isVerticalMove;
+        if (legalMove) return true;
+        else return false;
+         
     }
 }
